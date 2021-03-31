@@ -31,7 +31,4 @@ public class Tool {
     @OneToMany
     private List<Tag> tags;
 
-    @ManyToOne
-    private User users;
-
 }
