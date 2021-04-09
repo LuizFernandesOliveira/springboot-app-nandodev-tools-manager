@@ -2,6 +2,7 @@ package tools.manager.controllers;
 
 import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import tools.manager.models.User;
 import tools.manager.services.UserService;
@@ -19,8 +20,9 @@ public class UserController {
         return null;
     }
 
-    @PostMapping("/register")
+    @PostMapping
     void register(@RequestBody User user){
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userService.save(user);
     }
 

@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class UserService implements UserDetailsService {
+public class UserService {
 
     final private UserRepository userRepository;
 
@@ -23,17 +23,5 @@ public class UserService implements UserDetailsService {
 
     public User save(User user){
         return userRepository.save(user);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);
-        if (user != null){
-            throw new UsernameNotFoundException(user.getEmail());
-        }
-        return org.springframework.security.core.userdetails
-                .User.withUsername(user.getEmail())
-                .password(user.getPassword())
-                .authorities("USER").build();
     }
 }
