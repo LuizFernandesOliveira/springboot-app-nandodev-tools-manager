@@ -3,7 +3,6 @@ package tools.manager.models;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter
@@ -27,6 +26,4 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany
-    private List<Tool> tools;
 }

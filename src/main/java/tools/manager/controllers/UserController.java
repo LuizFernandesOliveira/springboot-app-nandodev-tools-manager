@@ -1,33 +1,24 @@
 package tools.manager.controllers;
 
-import javafx.geometry.Pos;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tools.manager.models.User;
 import tools.manager.services.UserService;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
+@AllArgsConstructor
 public class UserController {
-    @Autowired
-    private UserService userService;
 
-    @PostMapping("/login")
-    User login(@RequestBody User user){
-        return null;
-    }
+    private final UserService userService;
 
     @PostMapping
-    void register(@RequestBody User user){
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        userService.save(user);
+    public ResponseEntity<User> createUser(@RequestBody User user){
+        User userCreated = userService.createUser(user);
+        return ResponseEntity.status(200).body(userCreated);
     }
 
-    @GetMapping
-    List<User> findAll(){
-        return userService.findAll();
-    }
 }

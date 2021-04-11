@@ -27,7 +27,8 @@ public class Web extends WebSecurityConfigurerAdapter {
     @Value("${password}")
     private String USER_PASSWORD;
 
-    final private String USER_NAME = "Administrador";
+    @Value("Administrador")
+    private String USER_NAME;
 
     @Bean
     public AuthenticationManager customAuthenticationManager() throws Exception {
@@ -44,7 +45,7 @@ public class Web extends WebSecurityConfigurerAdapter {
                     .build());
         }
         auth.userDetailsService(
-                email -> new UserDetailsImpl(userRepository.findByEmail(email))
+                email -> userRepository.findByEmail(email).map(UserDetailsImpl::new).orElse(null)
         ).passwordEncoder(passwordEncoder());
     }
 

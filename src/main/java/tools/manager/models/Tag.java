@@ -18,4 +18,7 @@ public class Tag {
 
     @Column(nullable = false)
     private String name;
+
+    @ManyToOne
+    private Tool tool;
 }
