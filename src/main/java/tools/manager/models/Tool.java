@@ -28,6 +28,9 @@ public class Tool {
     @Column(nullable = false)
     private String description;
 
+    @OneToMany
+    private List<Tag> tags;
+
     @ManyToOne
     private User user;
 }

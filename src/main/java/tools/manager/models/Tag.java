@@ -5,11 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @Table(name = "tags")
 public class Tag {
     @Id
@@ -18,7 +17,4 @@ public class Tag {
 
     @Column(nullable = false)
     private String name;
-
-    @ManyToOne
-    private Tool tool;
 }

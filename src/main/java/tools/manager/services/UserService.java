@@ -7,6 +7,8 @@ import tools.manager.models.User;
 import tools.manager.repositories.UserRepository;
 import tools.manager.services.intefaces.UserServiceInterface;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class UserService implements UserServiceInterface {
@@ -18,4 +20,11 @@ public class UserService implements UserServiceInterface {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         return userRepository.save(user);
     }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+
 }
